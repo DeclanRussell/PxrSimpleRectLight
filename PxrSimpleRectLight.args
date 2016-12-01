@@ -1,0 +1,107 @@
+<args format="1.0">
+    <shaderType>
+        <tag value="light"/>
+    </shaderType>
+
+        <param name="intensity"
+               label="Intensity"
+               type="float"
+               default="1.0"
+               connectable="False"
+               widget="default">
+            <help>
+                intensity:  Specify the intensity of the light source linearly.
+            </help>
+        </param>
+        <param name="exposure"
+               label="Exposure"
+               type="float" default="0"
+               connectable="False"
+               widget="default">
+            <help>
+                exposure:  Specify the intensity of the light source as a power of 2 (in stops). 
+                Increasing the exposure by 1 will double the energy emitted by the light source. 
+                A value of 0 produces an intensity of 1, -1 produces .5.
+            </help>
+        </param>
+        <param name="lightColor"
+               label="Color"
+               type="color"
+               default="1 1 1"
+               connectable="False"
+               widget="color">
+            <help>
+               lightColor: The color of the emitted light.  If a color map is specified,
+               this tints the color map.
+            </help>
+        </param>
+        <param name="lightColorMap"
+               label="Color Map"
+               type="string" widget="assetIdInput"
+               options="texture"
+               connectable="False">
+            <help>
+               lightColorMap: Filename of a texture for light color.  If the lightColor
+               parameter is specified, it will tint the color of the map.
+            </help>
+        </param>
+        <param name="enableTemperature" 
+               label="Enable Temperature"
+               type="int"
+               default="0"
+               widget="checkBox" 
+               connectable="False">
+            <help>
+                enableTemperature: Enable plausible color temperature.
+            </help>
+        </param>
+        <param name="temperature" label="Temperature"
+               type="float" default="6500"
+               connectable="False"
+               widget="default">
+            <help>
+                temperature: Allow the user to choose the color temperature of 
+                the light in Kelvins. This control will act like a filter 
+                (a tinted transparent surface) in front of your light. If your 
+                light is white, you will get the chosen color temperature. 
+                If your light is colored, the color temperature will make it 
+                cooler (over 6500K) or warmer (below 6500K). 
+
+                NOTE: The effect will be less pronounced on fully saturated 
+                mono-chromatic lights.
+                
+                Defaults to 6500 K, the D65 illuminant (white point) used by 
+                sRGB and Rec. 709.
+            </help>
+            <hintdict name="conditionalVisOps">
+                <string value="equalTo" name="conditionalVisOp"/>
+                <string value="../enableTemperature" name="conditionalVisPath"/>
+                <string value="1" name="conditionalVisValue"/>
+            </hintdict>
+        </param>
+        <attribute name="visibility:camera" 
+               label="Primary Visibility"
+               type="int"
+               default="0"
+               widget="checkBox"
+               connectable="False">
+            <help>
+                visibility:camera: Primary visibility of the light.
+            </help>
+        </attribute>
+
+        <param name="lightGroup"
+               label="Light Group"
+               type="string"
+               default=""
+               widget="default"
+               connectable="False">
+            <help>
+                lightGroup:  Specify the light group name used for light group LPEs.
+            </help>
+        </param>
+
+    <!-- substitute with a real node ID -->
+    <rfmdata nodeid="1053527"
+             classification="light:rendernode/RenderMan/light:swatch/rmanSwatch"/>
+</args>
